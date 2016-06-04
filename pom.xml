@@ -21,13 +21,13 @@
   <parent>
     <groupId>io.fabric8.funktion</groupId>
     <artifactId>funktion-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.6</version>
     <relativePath>parent/pom.xml</relativePath>
   </parent>
 
   <groupId>io.fabric8.funktion</groupId>
   <artifactId>funktion-project</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.6</version>
   <packaging>pom</packaging>
 
   <name>Funktion</name>
@@ -163,7 +163,7 @@
       <dependency>
         <groupId>io.fabric8.funktion</groupId>
         <artifactId>funktion-runtime</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.6</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
