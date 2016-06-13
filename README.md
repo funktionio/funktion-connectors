@@ -42,7 +42,7 @@ Check out the following example projects:
 
 When you implement your **Funktion** using a JVM based language like Java, Groovy, Kotlin or Scala then your function is packaged up into a [Spring Boot](http://projects.spring.io/spring-boot/) application using [Apache Camel](http://camel.apache.org/) to implement the trigger via the various [endpoint URLs](http://camel.apache.org/components.html).
 
-When using non-JVM based languages to implement your **Funktion** then the [Spring Boot](http://projects.spring.io/spring-boot/) and Camel based trigger processor is embedded into your [Kubernetes Pod](http://kubernetes.io/docs/user-guide/pods/) via a [sidecar container](http://blog.kubernetes.io/2015/06/the-distributed-system-toolkit-patterns.html) which then invokes your funktion; usually via a local REST call.
+When using non-JVM based languages to implement your **Funktion** then the [Spring Boot](http://projects.spring.io/spring-boot/) and Camel based trigger processor is embedded into your [Kubernetes Pod](http://kubernetes.io/docs/user-guide/pods/) via a [sidecar container](http://blog.kubernetes.io/2015/06/the-distributed-system-toolkit-patterns.html) ([at least for now](https://github.com/fabric8io/funktion/issues/11)) which then invokes your funktion; usually via a local REST call.
 
 The creation of the docker images and generation of the kubernetes manifests is all done by the [fabric8-maven-plugin](https://github.com/fabric8io/fabric8-maven-plugin).
 
