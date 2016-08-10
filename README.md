@@ -1,5 +1,7 @@
 ## <img src="https://raw.githubusercontent.com/fabric8io/funktion/master/docs/images/icon.png" width="24" height="24"/>&nbsp; Funktion
 
+[![Join the chat at https://gitter.im/fabric8io/funktion](https://badges.gitter.im/fabric8io/funktion.svg)](https://gitter.im/fabric8io/funktion?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 **Funktion** is an open source event driven lambda style programming model on top of [Kubernetes](http://kubernetes.io).
 
 A _funktion_ is a regular function in any programming language bound to a _trigger_ deployed into Kubernetes. Then Kubernetes takes care of the rest (scaling, high availability, load balancing, logging and metrics etc).
