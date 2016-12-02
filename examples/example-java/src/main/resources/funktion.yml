@@ -1,5 +1,9 @@
 rules:
   - trigger: http
-    name: thingy
+    name: cheese
     action: io.fabric8.funktion.example.Main::cheese
+    trace: true
+  - trigger: http://bar
+    name: wine
+    action: io.fabric8.funktion.example.Main::wine
     trace: true

@@ -29,7 +29,7 @@ import org.apache.camel.model.RouteDefinition;
 import org.apache.camel.spring.boot.FatJarRouter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.embedded.ServletRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -115,7 +115,7 @@ public class FunktionRouteBuilder extends RouteBuilder {
                 trigger = path;
             }
 
-            trigger = DEFAULT_HTTP_ENDPOINT_PREFIX + trigger;
+            trigger = DEFAULT_HTTP_ENDPOINT_PREFIX + "/" + trigger;
         }
 
         RouteDefinition route = from(trigger);
