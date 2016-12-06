@@ -21,13 +21,13 @@
   <parent>
     <groupId>io.fabric8.funktion.starter</groupId>
     <artifactId>starter-parent-java</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1.3</version>
     <relativePath>../../starter-parent/starter-parent-java</relativePath>
   </parent>
 
   <groupId>io.fabric8.funktion.connector</groupId>
   <artifactId>connector-jira</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.1.3</version>
   <packaging>jar</packaging>
 
   <name>Funktion Connector JIRA</name>
