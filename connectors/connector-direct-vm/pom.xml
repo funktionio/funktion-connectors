@@ -21,12 +21,12 @@
   <parent>
     <groupId>io.fabric8.funktion.connector</groupId>
     <artifactId>connectors</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1.33</version>
   </parent>
 
   <groupId>io.fabric8.funktion.connector</groupId>
   <artifactId>connector-direct-vm</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.1.33</version>
   <packaging>jar</packaging>
 
   <name>Funktion Connector Direct VM</name>
