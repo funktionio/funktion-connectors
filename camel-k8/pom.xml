@@ -94,6 +94,7 @@
     <module>k8amq</module>
     <module>k8kafka</module>
     <module>k8nats</module>
+    <module>k8elasticsearch</module>
   </modules>
 
   <build>
