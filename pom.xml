@@ -138,6 +138,7 @@
   </pluginRepositories>
 
   <modules>
+    <module>camel-k8</module>
     <module>funktion-model</module>
     <module>funktion-runtime</module>
     <module>funktion-agent</module>
@@ -294,6 +295,11 @@
       <dependency>
         <groupId>io.fabric8.funktion</groupId>
         <artifactId>funktion-runtime</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>io.fabric8.funktion</groupId>
+        <artifactId>camel-cloud</artifactId>
         <version>1.0-SNAPSHOT</version>
       </dependency>
     </dependencies>
