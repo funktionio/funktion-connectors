@@ -19,8 +19,10 @@ package io.fabric8.funktion.model;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator;
+import io.fabric8.funktion.model.steps.Step;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +32,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ServiceLoader;
 
 public class Funktions {
     public static final String FILE_NAME = "funktion.yml";
@@ -144,7 +147,13 @@ public class Funktions {
     public static ObjectMapper createObjectMapper() {
         YAMLFactory yamlFactory = new YAMLFactory();
         yamlFactory.configure(YAMLGenerator.Feature.USE_NATIVE_TYPE_ID, false);
-        return new ObjectMapper(yamlFactory);
+        ObjectMapper om = new ObjectMapper(yamlFactory);
+
+        for (Step step : ServiceLoader.load(Step.class, Funktions.class.getClassLoader())) {
+            om.registerSubtypes(new NamedType(step.getClass(), step.getKind()));
+        }
+
+        return om;
     }
 
     public static Funktion parseFunktionConfig(File file) throws IOException {

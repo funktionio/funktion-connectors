@@ -16,16 +16,20 @@
  */
 package io.fabric8.funktion.model.steps;
 
-import io.fabric8.funktion.model.StepKinds;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.google.auto.service.AutoService;
 
 /**
  * Invokes an endpoint URI (typically HTTP or HTTPS) with the current payload
  */
+@AutoService(Step.class)
 public class Endpoint extends Step {
+    public static final String KIND = "endpoint";
+
     private String uri;
 
     public Endpoint() {
-        super(StepKinds.ENDPOINT);
+        super(KIND);
     }
 
     public Endpoint(String uri) {

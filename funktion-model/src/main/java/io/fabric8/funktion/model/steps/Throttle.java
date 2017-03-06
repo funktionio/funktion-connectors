@@ -17,27 +17,31 @@
 package io.fabric8.funktion.model.steps;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.fabric8.funktion.model.StepKinds;
+import com.google.auto.service.AutoService;
 
 /**
  * Throttles the flow
  */
+@AutoService(Step.class)
 @JsonPropertyOrder({"maximumRequests", "periodMillis"})
 public class Throttle extends ChildSteps<Throttle> {
+
+    public static final String KIND = "throttle";
+
     private long maximumRequests;
     private Long periodMillis;
 
     public Throttle() {
-        super(StepKinds.THROTTLE);
+        super(KIND);
     }
 
     public Throttle(long maximumRequests) {
-        super(StepKinds.THROTTLE);
+        super(KIND);
         this.maximumRequests = maximumRequests;
     }
 
     public Throttle(long maximumRequests, long periodMillis) {
-        super(StepKinds.THROTTLE);
+        super(KIND);
         this.maximumRequests = maximumRequests;
         this.periodMillis = periodMillis;
     }
@@ -48,7 +52,7 @@ public class Throttle extends ChildSteps<Throttle> {
     }
 
     public String getKind() {
-        return StepKinds.THROTTLE;
+        return KIND;
     }
 
     public long getMaximumRequests() {

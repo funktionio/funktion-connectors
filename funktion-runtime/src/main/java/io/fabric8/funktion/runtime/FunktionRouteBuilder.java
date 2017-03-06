@@ -48,12 +48,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import static io.fabric8.funktion.support.Lists.notNullList;
 
@@ -192,105 +187,27 @@ public class FunktionRouteBuilder extends RouteBuilder {
     }
 
 
-    protected void addSteps(ProcessorDefinition route, Iterable<Step> steps) {
+    public ProcessorDefinition addSteps(ProcessorDefinition route, Iterable<Step> steps) {
         if (route != null && steps != null) {
             for (Step item : steps) {
                 route = addStep(route, item);
             }
         }
+        return route;
     }
 
     private ProcessorDefinition addStep(ProcessorDefinition route, Step item) {
         assertRouteNotNull(route, item);
-        if (item instanceof Function) {
-            Function function = (Function) item;
-            String functionName = function.getName();
-            if (!Strings.isEmpty(functionName)) {
-                route.to("json:marshal");
-                String method = null;
-                int idx = functionName.indexOf("::");
-                if (idx > 0) {
-                    method = functionName.substring(idx + 2);
-                    functionName = functionName.substring(0, idx);
-                }
-                String uri = "class:" + functionName;
-                if (method != null) {
-                    uri += "?method=" + method;
-                }
-                uri = convertEndpointURI(uri);
-                route = route.to(uri);
+        for (StepHandler handler : ServiceLoader.load(StepHandler.class, getClass().getClassLoader())) {
+            if (handler.canHandle(item)) {
+                return handler.handle(item, route, this);
             }
-        } else if (item instanceof Endpoint) {
-            Endpoint invokeEndpoint = (Endpoint) item;
-            String uri = invokeEndpoint.getUri();
-            if (!Strings.isEmpty(uri)) {
-                uri = convertEndpointURI(uri);
-                route = route.to("json:marshal");
-                route = route.to(uri);
-            }
-        } else if (item instanceof SetBody) {
-            SetBody step = (SetBody) item;
-            route.setBody(constant(step.getBody()));
-        } else if (item instanceof Throttle) {
-            Throttle step = (Throttle) item;
-            ThrottleDefinition throttle = route.throttle(step.getMaximumRequests());
-            Long period = step.getPeriodMillis();
-            if (period != null) {
-                throttle.timePeriodMillis(period);
-            }
-            addSteps(throttle, step.getSteps());
-        } else if (item instanceof SetHeaders) {
-            SetHeaders step = (SetHeaders) item;
-            Map<String, Object> headers = step.getHeaders();
-            if (headers != null) {
-                Set<Map.Entry<String, Object>> entries = headers.entrySet();
-                for (Map.Entry<String, Object> entry : entries) {
-                    String key = entry.getKey();
-                    Object value = entry.getValue();
-                    route.setHeader(key, constant(value));
-                }
-            }
-        } else if (item instanceof Filter) {
-            Filter step = (Filter) item;
-            Predicate predicate = getMandatoryPredicate(step, step.getExpression());
-            FilterDefinition filter = route.filter(predicate);
-            addSteps(filter, step.getSteps());
-        } else if (item instanceof Split) {
-            Split step = (Split) item;
-            Expression expression = getMandatoryExpression(step, step.getExpression());
-            SplitDefinition split = route.split(expression);
-            addSteps(split, step.getSteps());
-        } else if (item instanceof Choice) {
-            Choice step = (Choice) item;
-            ChoiceDefinition choice = route.choice();
-            List<Filter> filters = notNullList(step.getFilters());
-            for (Filter filter : filters) {
-                Predicate predicate = getMandatoryPredicate(filter, filter.getExpression());
-                ChoiceDefinition when = choice.when(predicate);
-                addSteps(when, filter.getSteps());
-            }
-            Otherwise otherwiseStep = step.getOtherwise();
-            if (otherwiseStep != null) {
-                List<Step> otherwiseSteps = notNullList(otherwiseStep.getSteps());
-                if (!otherwiseSteps.isEmpty()) {
-                    ChoiceDefinition otherwise = choice.otherwise();
-                    addSteps(otherwise, otherwiseSteps);
-                }
-            }
-        } else if (item instanceof Log) {
-            Log step = (Log) item;
-            LoggingLevel loggingLevel = LoggingLevel.INFO;
-            if (step.getLoggingLevel() != null) {
-                loggingLevel = LoggingLevel.valueOf(step.getLoggingLevel());
-            }
-            route.log(loggingLevel, step.getLogger(), step.getMarker(), step.getMessage());
-        } else {
-            throw new IllegalStateException("Unknown step kind: " + item + " of class: " + item.getClass().getName());
         }
-        return route;
+
+        throw new IllegalStateException("Unknown step kind: " + item + " of class: " + item.getClass().getName());
     }
 
-    protected Predicate getMandatoryPredicate(Step step, String expression) {
+    public Predicate getMandatoryPredicate(Step step, String expression) {
         Objects.requireNonNull(expression, "No expression specified for step " + step);
         Language jsonpath = getLanguage();
         Predicate answer = jsonpath.createPredicate(expression);
@@ -298,7 +215,7 @@ public class FunktionRouteBuilder extends RouteBuilder {
         return answer;
     }
 
-    protected Expression getMandatoryExpression(Step step, String expression) {
+    public Expression getMandatoryExpression(Step step, String expression) {
         Objects.requireNonNull(expression, "No expression specified for step " + step);
         Language jsonpath = getLanguage();
         Expression answer = jsonpath.createExpression(expression);
@@ -374,7 +291,7 @@ public class FunktionRouteBuilder extends RouteBuilder {
         return route;
     }
 
-    private String convertEndpointURI(String uri) {
+    public String convertEndpointURI(String uri) {
         if (uri.startsWith("http:") || uri.startsWith("https:")) {
             // lets use http4 for all http transports
             uri = replacePrefix(uri, "http:", "http4:");

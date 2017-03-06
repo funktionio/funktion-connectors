@@ -16,6 +16,8 @@
  */
 package io.fabric8.funktion.model.steps;
 
+import com.google.auto.service.AutoService;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -84,6 +86,12 @@ public abstract class ChildSteps<T extends ChildSteps> extends Step {
 
     public Throttle throttle(long maximumRequests, long periodMillis) {
         Throttle step = new Throttle(maximumRequests, periodMillis);
+        addStep(step);
+        return step;
+    }
+
+    public Log log(String message, String loggingLevel, String logger, String marker) {
+        Log step = new Log(message, loggingLevel, logger, marker);
         addStep(step);
         return step;
     }

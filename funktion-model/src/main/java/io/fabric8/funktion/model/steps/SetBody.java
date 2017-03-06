@@ -16,16 +16,19 @@
  */
 package io.fabric8.funktion.model.steps;
 
-import io.fabric8.funktion.model.StepKinds;
+import com.google.auto.service.AutoService;
 
 /**
  * Sets the payload body
  */
+@AutoService(Step.class)
 public class SetBody extends Step {
+    public static final String KIND = "setBody";
+
     private String body;
 
     public SetBody() {
-        super(StepKinds.SET_BODY);
+        super(KIND);
     }
 
     public SetBody(String body) {

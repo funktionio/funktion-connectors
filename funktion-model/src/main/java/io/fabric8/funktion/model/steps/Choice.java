@@ -17,7 +17,8 @@
 package io.fabric8.funktion.model.steps;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.fabric8.funktion.model.StepKinds;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.google.auto.service.AutoService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +28,17 @@ import java.util.List;
  * <p>
  * Finds and evaluates the first {@link Filter} or invokes the otherwise steps
  */
+@AutoService(Step.class)
 @JsonPropertyOrder({"filters", "otherwise"})
+@JsonTypeName(Choice.KIND)
 public class Choice extends Step {
+    public static final String KIND = "choice";
+
     private List<Filter> filters = new ArrayList<>();
     private Otherwise otherwise;
 
     public Choice() {
-        super(StepKinds.CHOICE);
+        super(KIND);
     }
 
     public Choice(List<Filter> filters, Otherwise otherwise) {
@@ -66,7 +71,7 @@ public class Choice extends Step {
     //-------------------------------------------------------------------------
 
     public String getKind() {
-        return StepKinds.CHOICE;
+        return KIND;
     }
 
     public List<Filter> getFilters() {
