@@ -16,19 +16,24 @@
  */
 package io.fabric8.funktion.model.steps;
 
-import io.fabric8.funktion.model.StepKinds;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.google.auto.service.AutoService;
 
 /**
  * Sets the payload body
  */
+@AutoService(Step.class)
+@JsonPropertyOrder({"message", "loggingLevel", "logger", "marker"})
 public class Log extends Step {
+    public static final String KIND = "log";
+
     private String message;
     private String marker;
     private String logger;
     private String loggingLevel = "INFO";
 
     public Log() {
-        super(StepKinds.LOG);
+        super(KIND);
     }
 
     public Log(String message, String loggingLevel, String logger, String marker) {

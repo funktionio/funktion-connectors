@@ -65,6 +65,7 @@
     <rest-assured.version>3.0.0</rest-assured.version>
     <spring-boot.version>1.4.5.RELEASE</spring-boot.version>
     <spring-boot-plugin.version>1.4.5.RELEASE</spring-boot-plugin.version>
+    <auto-service.version>1.0-rc3</auto-service.version>
 
     <exec-maven-plugin.version>1.5.0</exec-maven-plugin.version>
     <maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
@@ -307,6 +308,12 @@
         <groupId>io.fabric8.funktion</groupId>
         <artifactId>funktion-runtime</artifactId>
         <version>1.0-SNAPSHOT</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.auto.service</groupId>
+        <artifactId>auto-service</artifactId>
+        <version>${auto-service.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
