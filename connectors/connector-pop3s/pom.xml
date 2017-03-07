@@ -21,12 +21,12 @@
   <parent>
     <groupId>io.fabric8.funktion.connector</groupId>
     <artifactId>connectors</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1.49</version>
   </parent>
 
   <groupId>io.fabric8.funktion.connector</groupId>
   <artifactId>connector-pop3s</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.1.49</version>
   <packaging>jar</packaging>
 
   <name>Funktion Connector POP3S</name>
