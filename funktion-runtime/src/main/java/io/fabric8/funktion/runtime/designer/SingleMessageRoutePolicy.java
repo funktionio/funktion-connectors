@@ -42,10 +42,28 @@ public class SingleMessageRoutePolicy extends RoutePolicySupport {
         LOG.info("Exchange Done for route " + route.getId() +
                 " exchange: " + exchange.getExchangeId() + " in: " + exchange.getIn().getBody(String.class));
 
-        try {
-            stopRoute(route);
-        } catch (Exception e) {
-            // ignore
-        }
+        stopCurrentRouteAsync(route);
     }
+
+    /**
+     * Allows to stop a route asynchronously using a separate background thread which can allow any current in-flight exchange
+     * to complete while the route is being shutdown.
+     * You may attempt to stop a route from processing an exchange which would be in-flight and therefore attempting to stop
+     * the route will defer due there is an inflight exchange in-progress. By stopping the route independently using a separate
+     * thread ensures the exchange can continue process and complete and the route can be stopped.
+     */
+    // TODO: in Camel 2.19 there is a stopRouteAsync method we can use
+    private void stopCurrentRouteAsync(final Route route) {
+        String threadId = route.getRouteContext().getCamelContext().getExecutorServiceManager().resolveThreadName("StopRouteAsync");
+        Runnable task = () -> {
+            try {
+                route.getRouteContext().getCamelContext().stopRoute(route.getId());
+            } catch (Exception e) {
+                handleException(e);
+            }
+        };
+        new Thread(task, threadId).start();
+    }
+
+
 }

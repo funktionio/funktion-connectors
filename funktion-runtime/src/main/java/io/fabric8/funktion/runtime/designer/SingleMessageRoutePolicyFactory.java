@@ -21,11 +21,10 @@ import org.apache.camel.model.RouteDefinition;
 import org.apache.camel.spi.RoutePolicy;
 import org.apache.camel.spi.RoutePolicyFactory;
 
-/**
- */
 public class SingleMessageRoutePolicyFactory implements RoutePolicyFactory {
+
     @Override
-    public RoutePolicy createRoutePolicy(CamelContext camelContext, String s, RouteDefinition routeDefinition) {
+    public RoutePolicy createRoutePolicy(CamelContext camelContext, String routeId, RouteDefinition route) {
         return new SingleMessageRoutePolicy();
     }
 }
