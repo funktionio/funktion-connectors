@@ -22,9 +22,10 @@ import io.fabric8.funktion.model.StepKinds;
 /**
  * Splits the payload into multiple messages
  */
-@JsonPropertyOrder({"expression", "steps"})
+@JsonPropertyOrder({"expression", "language", "steps"})
 public class Split extends ChildSteps<Split> {
     private String expression;
+    private String language;
 
     public Split() {
         super(StepKinds.SPLIT);
@@ -33,6 +34,12 @@ public class Split extends ChildSteps<Split> {
     public Split(String expression) {
         this();
         this.expression = expression;
+    }
+
+    public Split(String expression, String language) {
+        this();
+        this.expression = expression;
+        this.language = language;
     }
 
     @Override
@@ -51,4 +58,13 @@ public class Split extends ChildSteps<Split> {
     public void setExpression(String expression) {
         this.expression = expression;
     }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
 }
