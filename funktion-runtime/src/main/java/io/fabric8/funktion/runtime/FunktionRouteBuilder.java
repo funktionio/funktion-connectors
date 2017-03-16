@@ -252,12 +252,12 @@ public class FunktionRouteBuilder extends RouteBuilder {
             }
         } else if (item instanceof Filter) {
             Filter step = (Filter) item;
-            Predicate predicate = getMandatoryPredicate(step, step.getExpression());
+            Predicate predicate = getMandatoryPredicate(step, step.getExpression(), step.getLanguage());
             FilterDefinition filter = route.filter(predicate);
             addSteps(filter, step.getSteps());
         } else if (item instanceof Split) {
             Split step = (Split) item;
-            Expression expression = getMandatoryExpression(step, step.getExpression());
+            Expression expression = getMandatoryExpression(step, step.getExpression(), step.getLanguage());
             SplitDefinition split = route.split(expression);
             addSteps(split, step.getSteps());
         } else if (item instanceof Choice) {
@@ -265,7 +265,7 @@ public class FunktionRouteBuilder extends RouteBuilder {
             ChoiceDefinition choice = route.choice();
             List<Filter> filters = notNullList(step.getFilters());
             for (Filter filter : filters) {
-                Predicate predicate = getMandatoryPredicate(filter, filter.getExpression());
+                Predicate predicate = getMandatoryPredicate(filter, filter.getExpression(), filter.getLanguage());
                 ChoiceDefinition when = choice.when(predicate);
                 addSteps(when, filter.getSteps());
             }
@@ -290,24 +290,25 @@ public class FunktionRouteBuilder extends RouteBuilder {
         return route;
     }
 
-    protected Predicate getMandatoryPredicate(Step step, String expression) {
+    protected Predicate getMandatoryPredicate(Step step, String expression, String language) {
         Objects.requireNonNull(expression, "No expression specified for step " + step);
-        Language jsonpath = getLanguage();
+        Language jsonpath = getLanguage(language);
         Predicate answer = jsonpath.createPredicate(expression);
         Objects.requireNonNull(answer, "No predicate created from: " + expression);
         return answer;
     }
 
-    protected Expression getMandatoryExpression(Step step, String expression) {
+    protected Expression getMandatoryExpression(Step step, String expression, String language) {
         Objects.requireNonNull(expression, "No expression specified for step " + step);
-        Language jsonpath = getLanguage();
+        Language jsonpath = getLanguage(language);
         Expression answer = jsonpath.createExpression(expression);
         Objects.requireNonNull(answer, "No expression created from: " + expression);
         return answer;
     }
 
-    protected Language getLanguage() {
-        String languageName = "jsonpath";
+    protected Language getLanguage(String language) {
+        // use jsonpath as default
+        String languageName = language != null && !language.isEmpty() ? language : "jsonpath";
         Language answer = getContext().resolveLanguage(languageName);
         Objects.requireNonNull(answer, "The language `" + languageName + "` cound not be resolved!");
         return answer;

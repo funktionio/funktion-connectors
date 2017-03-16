@@ -105,8 +105,20 @@ public class Flow extends DtoSupport {
         return step;
     }
 
+    public Split split(String expression, String language) {
+        Split step = new Split(expression, language);
+        addStep(step);
+        return step;
+    }
+
     public Filter filter(String expression) {
         Filter step = new Filter(expression);
+        addStep(step);
+        return step;
+    }
+
+    public Filter filter(String expression, String language) {
+        Filter step = new Filter(expression, language);
         addStep(step);
         return step;
     }

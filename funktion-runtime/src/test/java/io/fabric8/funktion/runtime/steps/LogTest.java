@@ -44,8 +44,6 @@ public class LogTest extends FunktionTestSupport {
 
     @Test
     public void testStep() throws Exception {
-        // TODO
-        // resultEndpoint.expectedMessageCount(3);
         resultEndpoint.expectedMinimumMessageCount(3);
         resultEndpoint.setResultWaitTime(2000);
 

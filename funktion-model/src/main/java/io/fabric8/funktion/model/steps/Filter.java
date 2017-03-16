@@ -22,9 +22,10 @@ import io.fabric8.funktion.model.StepKinds;
 /**
  * If a filter expression is matched then it invokes the child steps
  */
-@JsonPropertyOrder({"expression", "steps"})
+@JsonPropertyOrder({"expression", "language", "steps"})
 public class Filter extends ChildSteps<Filter> {
     private String expression;
+    private String language;
 
     public Filter() {
         super(StepKinds.FILTER);
@@ -33,6 +34,12 @@ public class Filter extends ChildSteps<Filter> {
     public Filter(String expression) {
         this();
         this.expression = expression;
+    }
+
+    public Filter(String expression, String language) {
+        this();
+        this.expression = expression;
+        this.language = language;
     }
 
     @Override
@@ -52,4 +59,11 @@ public class Filter extends ChildSteps<Filter> {
         this.expression = expression;
     }
 
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 }
