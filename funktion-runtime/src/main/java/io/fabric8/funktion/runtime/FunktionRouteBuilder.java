@@ -223,7 +223,7 @@ public class FunktionRouteBuilder extends RouteBuilder {
         }
         LOG.info(message.toString());
 
-        // TODO: Camel 2.19 has funktionality OOTB for this
+        // TODO: Camel 2.19 has functionality OOTB
         // https://github.com/apache/camel/blob/master/components/camel-spring-boot/src/main/java/org/apache/camel/spring/boot/CamelConfigurationProperties.java#L146
         if (flow.isSingleMessageModeEnabled() || (config.getSingleMessageMode() != null && config.getSingleMessageMode())) {
             LOG.info("Enabling single message mode so that only one message is consumed for Design Mode");
