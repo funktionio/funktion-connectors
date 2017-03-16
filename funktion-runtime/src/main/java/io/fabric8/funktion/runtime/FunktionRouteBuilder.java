@@ -70,6 +70,16 @@ public class FunktionRouteBuilder extends RouteBuilder {
 
     private Set<String> localHosts = new HashSet<>(Arrays.asList("localhost", "0.0.0.0", "127.0.0.1"));
 
+    private FunktionConfigurationProperties config;
+
+    public FunktionConfigurationProperties getConfig() {
+        return config;
+    }
+
+    public void setConfig(FunktionConfigurationProperties config) {
+        this.config = config;
+    }
+
     // must have a main method spring-boot can run
     public static void main(String[] args) {
         ApplicationContext applicationContext = new SpringApplication(FunktionRouteBuilder.class).run(args);
@@ -105,6 +115,7 @@ public class FunktionRouteBuilder extends RouteBuilder {
         for (Flow rule : rules) {
             configureRule(rule, idx++);
         }
+
     }
 
     protected Funktion loadFunktion() throws IOException {
@@ -112,10 +123,9 @@ public class FunktionRouteBuilder extends RouteBuilder {
     }
 
     protected void configureRule(Flow flow, int funktionIndex) throws MalformedURLException {
-        if (flow.isTraceEnabled()) {
+        if (flow.isTraceEnabled() || (config != null && config.getTrace())) {
             getContext().setTracing(true);
         }
-
 
         StringBuilder message = new StringBuilder("FLOW ");
         String name = flow.getName();
@@ -176,7 +186,7 @@ public class FunktionRouteBuilder extends RouteBuilder {
             throw new IllegalStateException("No valid steps! Invalid flow " + flow);
 
         }
-        if (flow.isLogResultEnabled()) {
+        if (flow.isLogResultEnabled() || (config != null && config.getLogResult())) {
             String chain = "log:" + name + "?showStreams=true";
             route.to(chain);
             message.append(" => ");
@@ -185,12 +195,13 @@ public class FunktionRouteBuilder extends RouteBuilder {
         }
         LOG.info(message.toString());
 
-        if (flow.isSingleMessageModeEnabled()) {
+        // TODO: Camel 2.19 has funktionality OOTB for this
+        // https://github.com/apache/camel/blob/master/components/camel-spring-boot/src/main/java/org/apache/camel/spring/boot/CamelConfigurationProperties.java#L146
+        if (flow.isSingleMessageModeEnabled() || (config != null && config.getSingleMessageMode())) {
             LOG.info("Enabling single message mode so that only one message is consumed for Design Mode");
             getContext().addRoutePolicyFactory(new SingleMessageRoutePolicyFactory());
         }
     }
-
 
     protected void addSteps(ProcessorDefinition route, Iterable<Step> steps) {
         if (route != null && steps != null) {
@@ -398,6 +409,5 @@ public class FunktionRouteBuilder extends RouteBuilder {
             return null;
         }
     }
-
 
 }

@@ -17,10 +17,12 @@
 package io.fabric8.funktion.runtime;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@EnableConfigurationProperties(FunktionConfigurationProperties.class)
 public class FunktionAutoConfiguration {
 
     /**
@@ -28,8 +30,10 @@ public class FunktionAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean(FunktionRouteBuilder.class)
-    public FunktionRouteBuilder funktionRouteBuilder() {
-        return new FunktionRouteBuilder();
+    public FunktionRouteBuilder funktionRouteBuilder(FunktionConfigurationProperties config) {
+        FunktionRouteBuilder builder = new FunktionRouteBuilder();
+        builder.setConfig(config);
+        return builder;
     }
 
 }
