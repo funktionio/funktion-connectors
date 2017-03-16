@@ -36,6 +36,12 @@ public class FunktionConfigurationProperties {
      */
     private Boolean singleMessageMode;
 
+    /**
+     * To log the flow model in either yaml or json format.
+     * You can use false or off to turn this off.
+     */
+    private String dumpFlowModel = "yaml";
+
     public Boolean getTrace() {
         return trace;
     }
@@ -58,5 +64,13 @@ public class FunktionConfigurationProperties {
 
     public void setSingleMessageMode(Boolean singleMessageMode) {
         this.singleMessageMode = singleMessageMode;
+    }
+
+    public String getDumpFlowModel() {
+        return dumpFlowModel;
+    }
+
+    public void setDumpFlowModel(String dumpFlowModel) {
+        this.dumpFlowModel = dumpFlowModel;
     }
 }

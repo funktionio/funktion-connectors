@@ -30,10 +30,8 @@ public class FunktionAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean(FunktionRouteBuilder.class)
-    public FunktionRouteBuilder funktionRouteBuilder(FunktionConfigurationProperties config) {
-        FunktionRouteBuilder builder = new FunktionRouteBuilder();
-        builder.setConfig(config);
-        return builder;
+    public FunktionRouteBuilder funktionRouteBuilder() {
+        return new FunktionRouteBuilder();
     }
 
 }
