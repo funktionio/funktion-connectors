@@ -39,7 +39,7 @@ data:
       javaType: org.apache.camel.component.aws.s3.S3Component
       groupId: org.apache.camel
       artifactId: camel-aws
-      version: 2.18.1
+      version: 2.18.3
     componentProperties: {}
     properties:
       bucketNameOrArn:
@@ -126,6 +126,17 @@ data:
         secret: false
         description: Amazon AWS Secret Key
         order: 8
+      autocloseBody:
+        kind: parameter
+        group: consumer
+        label: consumer
+        type: boolean
+        javaType: boolean
+        deprecated: false
+        secret: false
+        defaultValue: true
+        description: If this option is true and includeBody is true then the S3Object.close() method will be called on exchange completion
+        order: 9
       bridgeErrorHandler:
         kind: parameter
         group: consumer
@@ -137,7 +148,7 @@ data:
         secret: false
         defaultValue: false
         description: Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN/ERROR level and ignored.
-        order: 9
+        order: 10
       deleteAfterRead:
         kind: parameter
         group: consumer
@@ -148,7 +159,7 @@ data:
         secret: false
         defaultValue: true
         description: Delete objects from S3 after they have been retrieved. The delete is only performed if the Exchange is committed. If a rollback occurs the object is not deleted. If this option is false then the same objects will be retrieve over and over again on the polls. Therefore you need to use the Idempotent Consumer EIP in the route to filter out duplicates. You can filter using the link S3ConstantsBUCKET_NAME and link S3ConstantsKEY headers or only the link S3ConstantsKEY header.
-        order: 10
+        order: 11
       fileName:
         kind: parameter
         group: consumer
@@ -158,7 +169,7 @@ data:
         deprecated: false
         secret: false
         description: To get the object from the bucket with the given file name
-        order: 11
+        order: 12
       includeBody:
         kind: parameter
         group: consumer
@@ -171,7 +182,7 @@ data:
         description: 'Camel 2.17: If it is true the exchange body will be set to a stream
           to the contents of the file. If false the headers will be set with the S3 object
           metadata but the body will be null.'
-        order: 12
+        order: 13
       maxMessagesPerPoll:
         kind: parameter
         group: consumer
@@ -182,7 +193,7 @@ data:
         secret: false
         defaultValue: "10"
         description: Gets the maximum number of messages as a limit to poll at each polling. Is default unlimited but use 0 or negative number to disable it as unlimited.
-        order: 13
+        order: 14
       prefix:
         kind: parameter
         group: consumer
@@ -193,7 +204,7 @@ data:
         secret: false
         description: 'Camel 2.10.1: The prefix which is used in the com.amazonaws.services.s3.model.ListObjectsRequest
           to only consume objects we are interested in.'
-        order: 14
+        order: 15
       sendEmptyMessageWhenIdle:
         kind: parameter
         group: consumer
@@ -205,7 +216,7 @@ data:
         secret: false
         defaultValue: false
         description: If the polling consumer did not poll any files you can enable this option to send an empty message (no body) instead.
-        order: 15
+        order: 16
       exceptionHandler:
         kind: parameter
         group: consumer (advanced)
@@ -216,7 +227,7 @@ data:
         deprecated: false
         secret: false
         description: To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN/ERROR level and ignored.
-        order: 16
+        order: 17
       exchangePattern:
         kind: parameter
         group: consumer (advanced)
@@ -235,7 +246,7 @@ data:
         deprecated: false
         secret: false
         description: Sets the exchange pattern when the consumer creates an exchange.
-        order: 17
+        order: 18
       pollStrategy:
         kind: parameter
         group: consumer (advanced)
@@ -246,7 +257,7 @@ data:
         deprecated: false
         secret: false
         description: A pluggable org.apache.camel.PollingConsumerPollingStrategy allowing you to provide your custom implementation to control error handling usually occurred during the poll operation before an Exchange have been created and being routed in Camel.
-        order: 18
+        order: 19
       deleteAfterWrite:
         kind: parameter
         group: producer
@@ -257,7 +268,7 @@ data:
         secret: false
         defaultValue: false
         description: 'Camel 2.11.0: Delete file object after the S3 file has been uploaded'
-        order: 19
+        order: 20
       multiPartUpload:
         kind: parameter
         group: producer
@@ -269,7 +280,7 @@ data:
         defaultValue: false
         description: 'Camel 2.15.0: If it is true camel will upload the file with multi
           part format the part size is decided by the option of partSize'
-        order: 20
+        order: 21
       operation:
         kind: parameter
         group: producer
@@ -284,7 +295,7 @@ data:
         secret: false
         description: 'Camel 2.18: The operation to do in case the user don''t want to
           do only an upload'
-        order: 21
+        order: 22
       partSize:
         kind: parameter
         group: producer
@@ -296,7 +307,7 @@ data:
         defaultValue: "26214400"
         description: 'Camel 2.15.0: Setup the partSize which is used in multi part upload
           the default size is 25M.'
-        order: 22
+        order: 23
       region:
         kind: parameter
         group: producer
@@ -306,7 +317,7 @@ data:
         deprecated: false
         secret: false
         description: The region where the bucket is located. This option is used in the com.amazonaws.services.s3.model.CreateBucketRequest.
-        order: 23
+        order: 24
       serverSideEncryption:
         kind: parameter
         group: producer
@@ -317,7 +328,7 @@ data:
         secret: false
         description: 'Camel 2.16: Sets the server-side encryption algorithm when encrypting
           the object using AWS-managed keys. For example use AES256.'
-        order: 24
+        order: 25
       storageClass:
         kind: parameter
         group: producer
@@ -328,7 +339,7 @@ data:
         secret: false
         description: 'Camel 2.8.4: The storage class to set in the com.amazonaws.services.s3.model.PutObjectRequest
           request.'
-        order: 25
+        order: 26
       synchronous:
         kind: parameter
         group: advanced
@@ -339,7 +350,7 @@ data:
         secret: false
         defaultValue: false
         description: Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).
-        order: 26
+        order: 27
       backoffErrorThreshold:
         kind: parameter
         group: scheduler
@@ -350,7 +361,7 @@ data:
         deprecated: false
         secret: false
         description: The number of subsequent error polls (failed due some error) that should happen before the backoffMultipler should kick-in.
-        order: 27
+        order: 28
       backoffIdleThreshold:
         kind: parameter
         group: scheduler
@@ -361,7 +372,7 @@ data:
         deprecated: false
         secret: false
         description: The number of subsequent idle polls that should happen before the backoffMultipler should kick-in.
-        order: 28
+        order: 29
       backoffMultiplier:
         kind: parameter
         group: scheduler
@@ -372,7 +383,7 @@ data:
         deprecated: false
         secret: false
         description: To let the scheduled polling consumer backoff if there has been a number of subsequent idles/errors in a row. The multiplier is then the number of polls that will be skipped before the next actual attempt is happening again. When this option is in use then backoffIdleThreshold and/or backoffErrorThreshold must also be configured.
-        order: 29
+        order: 30
       delay:
         kind: parameter
         group: scheduler
@@ -384,7 +395,7 @@ data:
         secret: false
         defaultValue: "500"
         description: Milliseconds before the next poll. You can also specify time values using units such as 60s (60 seconds) 5m30s (5 minutes and 30 seconds) and 1h (1 hour).
-        order: 30
+        order: 31
       greedy:
         kind: parameter
         group: scheduler
@@ -396,7 +407,7 @@ data:
         secret: false
         defaultValue: false
         description: If greedy is enabled then the ScheduledPollConsumer will run immediately again if the previous run polled 1 or more messages.
-        order: 31
+        order: 32
       initialDelay:
         kind: parameter
         group: scheduler
@@ -408,7 +419,7 @@ data:
         secret: false
         defaultValue: "1000"
         description: Milliseconds before the first poll starts. You can also specify time values using units such as 60s (60 seconds) 5m30s (5 minutes and 30 seconds) and 1h (1 hour).
-        order: 32
+        order: 33
       runLoggingLevel:
         kind: parameter
         group: scheduler
@@ -427,7 +438,7 @@ data:
         secret: false
         defaultValue: TRACE
         description: The consumer logs a start/complete log line when it polls. This option allows you to configure the logging level for that.
-        order: 33
+        order: 34
       scheduledExecutorService:
         kind: parameter
         group: scheduler
@@ -438,7 +449,7 @@ data:
         deprecated: false
         secret: false
         description: Allows for configuring a custom/shared thread pool to use for the consumer. By default each consumer has its own single threaded thread pool.
-        order: 34
+        order: 35
       scheduler:
         kind: parameter
         group: scheduler
@@ -454,7 +465,7 @@ data:
         secret: false
         defaultValue: none
         description: To use a cron scheduler from either camel-spring or camel-quartz2 component
-        order: 35
+        order: 36
       schedulerProperties:
         kind: parameter
         group: scheduler
@@ -466,7 +477,7 @@ data:
         deprecated: false
         secret: false
         description: To configure additional properties when using a custom scheduler or any of the Quartz2 Spring based scheduler.
-        order: 36
+        order: 37
       startScheduler:
         kind: parameter
         group: scheduler
@@ -478,7 +489,7 @@ data:
         secret: false
         defaultValue: true
         description: Whether the scheduler should be auto started.
-        order: 37
+        order: 38
       timeUnit:
         kind: parameter
         group: scheduler
@@ -498,7 +509,7 @@ data:
         secret: false
         defaultValue: MILLISECONDS
         description: Time unit for initialDelay and delay options.
-        order: 38
+        order: 39
       useFixedDelay:
         kind: parameter
         group: scheduler
@@ -510,7 +521,7 @@ data:
         secret: false
         defaultValue: true
         description: Controls if fixed delay or fixed rate is used. See ScheduledExecutorService in JDK for details.
-        order: 39
+        order: 40
   documentation.adoc: |+
     [[AWS-S3-S3Component]]
     S3 Component
@@ -560,7 +571,7 @@ data:
 
 
     // endpoint options: START
-    The AWS S3 Storage Service component supports 40 endpoint options which are listed below:
+    The AWS S3 Storage Service component supports 41 endpoint options which are listed below:
 
     {% raw %}
     [width="100%",cols="2,1,1m,1m,5",options="header"]
@@ -575,6 +586,7 @@ data:
     | proxyHost | common |  | String | Camel 2.16: To define a proxy host when instantiating the SQS client
     | proxyPort | common |  | Integer | Camel 2.16: Specify a proxy port to be used inside the client definition.
     | secretKey | common |  | String | Amazon AWS Secret Key
+    | autocloseBody | consumer | true | boolean | If this option is true and includeBody is true then the S3Object.close() method will be called on exchange completion
     | bridgeErrorHandler | consumer | false | boolean | Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN/ERROR level and ignored.
     | deleteAfterRead | consumer | true | boolean | Delete objects from S3 after they have been retrieved. The delete is only performed if the Exchange is committed. If a rollback occurs the object is not deleted. If this option is false then the same objects will be retrieve over and over again on the polls. Therefore you need to use the Idempotent Consumer EIP in the route to filter out duplicates. You can filter using the link S3ConstantsBUCKET_NAME and link S3ConstantsKEY headers or only the link S3ConstantsKEY header.
     | fileName | consumer |  | String | To get the object from the bucket with the given file name

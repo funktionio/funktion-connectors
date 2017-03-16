@@ -40,7 +40,7 @@ data:
       javaType: org.apache.camel.component.xslt.XsltComponent
       groupId: org.apache.camel
       artifactId: camel-core
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       xmlConverter:
         kind: property

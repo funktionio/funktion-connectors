@@ -29,8 +29,8 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>Funktion Connector AHC Secure Websocket</name>
-  <description>Funktion :: Connector :: AHC Secure Websocket</description>
+  <name>Funktion Connector AHC Secure Websocket (Secure)</name>
+  <description>Funktion :: Connector :: AHC Secure Websocket (Secure)</description>
   
   <dependencies>
     <dependency>

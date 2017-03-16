@@ -32,7 +32,7 @@ data:
       scheme: smpps
       alternativeSchemes: smpp,smpps
       syntax: smpps:host:port
-      title: SMPP
+      title: SMPP (Secure)
       description: To send and receive SMS using a SMSC (Short Message Service Center).
       label: mobile
       deprecated: false
@@ -41,7 +41,7 @@ data:
       javaType: org.apache.camel.component.smpp.SmppComponent
       groupId: org.apache.camel
       artifactId: camel-smpp
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       configuration:
         kind: property

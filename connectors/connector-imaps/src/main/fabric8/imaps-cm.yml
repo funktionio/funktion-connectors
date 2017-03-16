@@ -33,7 +33,7 @@ data:
       alternativeSchemes: imap,imaps,pop3,pop3s,smtp,smtps
       syntax: imaps:host:port
       alternativeSyntax: imaps:username:password@host:port
-      title: IMAPS
+      title: IMAPS (Secure)
       description: To send or receive emails using imap/pop3 or stmp protocols.
       label: mail
       deprecated: false
@@ -41,7 +41,7 @@ data:
       javaType: org.apache.camel.component.mail.MailComponent
       groupId: org.apache.camel
       artifactId: camel-mail
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       configuration:
         kind: property

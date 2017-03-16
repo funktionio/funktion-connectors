@@ -32,7 +32,7 @@ data:
       scheme: http4s
       alternativeSchemes: http4,http4s
       syntax: http4s:httpUri
-      title: HTTP4S
+      title: HTTP4S (Secure)
       description: For calling out to external HTTP servers using Apache HTTP Client 4.x.
       label: http
       deprecated: false
@@ -42,7 +42,7 @@ data:
       javaType: null
       groupId: org.apache.camel
       artifactId: camel-http4
-      version: 2.18.1
+      version: 2.18.3
     componentProperties: {}
     properties:
       httpUri:

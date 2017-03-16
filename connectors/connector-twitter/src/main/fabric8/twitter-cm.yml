@@ -39,42 +39,52 @@ data:
       javaType: org.apache.camel.component.twitter.TwitterComponent
       groupId: org.apache.camel
       artifactId: camel-twitter
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       accessToken:
         kind: property
+        label: security
+        required: false
         type: string
         javaType: java.lang.String
         deprecated: false
-        secret: false
+        secret: true
         description: The access token
         order: 0
       accessTokenSecret:
         kind: property
+        label: security
+        required: false
         type: string
         javaType: java.lang.String
         deprecated: false
-        secret: false
+        secret: true
         description: The access token secret
         order: 1
       consumerKey:
         kind: property
+        label: security
+        required: false
         type: string
         javaType: java.lang.String
         deprecated: false
-        secret: false
+        secret: true
         description: The consumer key
         order: 2
       consumerSecret:
         kind: property
+        label: security
+        required: false
         type: string
         javaType: java.lang.String
         deprecated: false
-        secret: false
+        secret: true
         description: The consumer secret
         order: 3
       httpProxyHost:
         kind: property
+        label: proxy
+        required: false
         type: string
         javaType: java.lang.String
         deprecated: false
@@ -83,6 +93,8 @@ data:
         order: 4
       httpProxyUser:
         kind: property
+        label: proxy
+        required: false
         type: string
         javaType: java.lang.String
         deprecated: false
@@ -91,6 +103,8 @@ data:
         order: 5
       httpProxyPassword:
         kind: property
+        label: proxy
+        required: false
         type: string
         javaType: java.lang.String
         deprecated: false
@@ -99,6 +113,8 @@ data:
         order: 6
       httpProxyPort:
         kind: property
+        label: proxy
+        required: false
         type: integer
         javaType: int
         deprecated: false
@@ -126,42 +142,6 @@ data:
         secret: false
         description: What polling mode to use direct polling or event based. The event mode is only supported when the endpoint kind is event based.
         order: 0
-      accessToken:
-        kind: parameter
-        group: common
-        type: string
-        javaType: java.lang.String
-        deprecated: false
-        secret: false
-        description: The access token. Can also be configured on the TwitterComponent level instead.
-        order: 1
-      accessTokenSecret:
-        kind: parameter
-        group: common
-        type: string
-        javaType: java.lang.String
-        deprecated: false
-        secret: false
-        description: The access secret. Can also be configured on the TwitterComponent level instead.
-        order: 2
-      consumerKey:
-        kind: parameter
-        group: common
-        type: string
-        javaType: java.lang.String
-        deprecated: false
-        secret: false
-        description: The consumer key. Can also be configured on the TwitterComponent level instead.
-        order: 3
-      consumerSecret:
-        kind: parameter
-        group: common
-        type: string
-        javaType: java.lang.String
-        deprecated: false
-        secret: false
-        description: The consumer secret. Can also be configured on the TwitterComponent level instead.
-        order: 4
       user:
         kind: parameter
         group: common
@@ -170,7 +150,7 @@ data:
         deprecated: false
         secret: false
         description: Username used for user timeline consumption direct message production etc.
-        order: 5
+        order: 1
       bridgeErrorHandler:
         kind: parameter
         group: consumer
@@ -182,7 +162,7 @@ data:
         secret: false
         defaultValue: false
         description: Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN/ERROR level and ignored.
-        order: 6
+        order: 2
       sendEmptyMessageWhenIdle:
         kind: parameter
         group: consumer
@@ -194,7 +174,7 @@ data:
         secret: false
         defaultValue: false
         description: If the polling consumer did not poll any files you can enable this option to send an empty message (no body) instead.
-        order: 7
+        order: 3
       type:
         kind: parameter
         group: consumer
@@ -209,7 +189,7 @@ data:
         secret: false
         defaultValue: direct
         description: Endpoint type to use. Only streaming supports event type.
-        order: 8
+        order: 4
       distanceMetric:
         kind: parameter
         group: consumer (advanced)
@@ -226,7 +206,7 @@ data:
           the configured metrics. The unit can either be mi for miles or km for kilometers.
           You need to configure all the following options: longitude latitude radius and
           distanceMetric.'
-        order: 9
+        order: 5
       exceptionHandler:
         kind: parameter
         group: consumer (advanced)
@@ -237,7 +217,7 @@ data:
         deprecated: false
         secret: false
         description: To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN/ERROR level and ignored.
-        order: 10
+        order: 6
       exchangePattern:
         kind: parameter
         group: consumer (advanced)
@@ -256,7 +236,7 @@ data:
         deprecated: false
         secret: false
         description: Sets the exchange pattern when the consumer creates an exchange.
-        order: 11
+        order: 7
       latitude:
         kind: parameter
         group: consumer (advanced)
@@ -267,7 +247,7 @@ data:
         secret: false
         description: 'Used by the non-stream geography search to search by latitude. You
           need to configure all the following options: longitude latitude radius and distanceMetric.'
-        order: 12
+        order: 8
       locations:
         kind: parameter
         group: consumer (advanced)
@@ -277,7 +257,7 @@ data:
         deprecated: false
         secret: false
         description: Bounding boxes created by pairs of lat/lons. Can be used for streaming/filter. A pair is defined as latlon. And multiple paris can be separated by semi colon.
-        order: 13
+        order: 9
       longitude:
         kind: parameter
         group: consumer (advanced)
@@ -289,7 +269,7 @@ data:
         description: 'Used by the non-stream geography search to search by longitude.
           You need to configure all the following options: longitude latitude radius and
           distanceMetric.'
-        order: 14
+        order: 10
       pollStrategy:
         kind: parameter
         group: consumer (advanced)
@@ -300,7 +280,7 @@ data:
         deprecated: false
         secret: false
         description: A pluggable org.apache.camel.PollingConsumerPollingStrategy allowing you to provide your custom implementation to control error handling usually occurred during the poll operation before an Exchange have been created and being routed in Camel.
-        order: 15
+        order: 11
       radius:
         kind: parameter
         group: consumer (advanced)
@@ -311,7 +291,7 @@ data:
         secret: false
         description: 'Used by the non-stream geography search to search by radius. You
           need to configure all the following options: longitude latitude radius and distanceMetric.'
-        order: 16
+        order: 12
       twitterStream:
         kind: parameter
         group: consumer (advanced)
@@ -321,7 +301,7 @@ data:
         deprecated: false
         secret: false
         description: To use a custom instance of TwitterStream
-        order: 17
+        order: 13
       synchronous:
         kind: parameter
         group: advanced
@@ -332,7 +312,7 @@ data:
         secret: false
         defaultValue: false
         description: Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).
-        order: 18
+        order: 14
       count:
         kind: parameter
         group: filter
@@ -342,7 +322,7 @@ data:
         deprecated: false
         secret: false
         description: Limiting number of results per page.
-        order: 19
+        order: 15
       filterOld:
         kind: parameter
         group: filter
@@ -353,7 +333,7 @@ data:
         secret: false
         defaultValue: true
         description: Filter out old tweets that has previously been polled. This state is stored in memory only and based on last tweet id.
-        order: 20
+        order: 16
       keywords:
         kind: parameter
         group: filter
@@ -363,7 +343,7 @@ data:
         deprecated: false
         secret: false
         description: Can be used for search and streaming/filter. Multiple values can be separated with comma.
-        order: 21
+        order: 17
       lang:
         kind: parameter
         group: filter
@@ -373,7 +353,7 @@ data:
         deprecated: false
         secret: false
         description: The lang string ISO_639-1 which will be used for searching
-        order: 22
+        order: 18
       numberOfPages:
         kind: parameter
         group: filter
@@ -384,7 +364,7 @@ data:
         secret: false
         defaultValue: "1"
         description: The number of pages result which you want camel-twitter to consume.
-        order: 23
+        order: 19
       sinceId:
         kind: parameter
         group: filter
@@ -395,7 +375,7 @@ data:
         secret: false
         defaultValue: "1"
         description: The last tweet id which will be used for pulling the tweets. It is useful when the camel route is restarted after a long running.
-        order: 24
+        order: 20
       userIds:
         kind: parameter
         group: filter
@@ -405,7 +385,7 @@ data:
         deprecated: false
         secret: false
         description: To filter by user ids for streaming/filter. Multiple values can be separated by comma.
-        order: 25
+        order: 21
       backoffErrorThreshold:
         kind: parameter
         group: scheduler
@@ -416,7 +396,7 @@ data:
         deprecated: false
         secret: false
         description: The number of subsequent error polls (failed due some error) that should happen before the backoffMultipler should kick-in.
-        order: 26
+        order: 22
       backoffIdleThreshold:
         kind: parameter
         group: scheduler
@@ -427,7 +407,7 @@ data:
         deprecated: false
         secret: false
         description: The number of subsequent idle polls that should happen before the backoffMultipler should kick-in.
-        order: 27
+        order: 23
       backoffMultiplier:
         kind: parameter
         group: scheduler
@@ -438,7 +418,7 @@ data:
         deprecated: false
         secret: false
         description: To let the scheduled polling consumer backoff if there has been a number of subsequent idles/errors in a row. The multiplier is then the number of polls that will be skipped before the next actual attempt is happening again. When this option is in use then backoffIdleThreshold and/or backoffErrorThreshold must also be configured.
-        order: 28
+        order: 24
       delay:
         kind: parameter
         group: scheduler
@@ -450,7 +430,7 @@ data:
         secret: false
         defaultValue: "60000"
         description: Milliseconds before the next poll.
-        order: 29
+        order: 25
       greedy:
         kind: parameter
         group: scheduler
@@ -462,7 +442,7 @@ data:
         secret: false
         defaultValue: false
         description: If greedy is enabled then the ScheduledPollConsumer will run immediately again if the previous run polled 1 or more messages.
-        order: 30
+        order: 26
       initialDelay:
         kind: parameter
         group: scheduler
@@ -474,7 +454,7 @@ data:
         secret: false
         defaultValue: "1000"
         description: Milliseconds before the first poll starts. You can also specify time values using units such as 60s (60 seconds) 5m30s (5 minutes and 30 seconds) and 1h (1 hour).
-        order: 31
+        order: 27
       runLoggingLevel:
         kind: parameter
         group: scheduler
@@ -493,7 +473,7 @@ data:
         secret: false
         defaultValue: TRACE
         description: The consumer logs a start/complete log line when it polls. This option allows you to configure the logging level for that.
-        order: 32
+        order: 28
       scheduledExecutorService:
         kind: parameter
         group: scheduler
@@ -504,7 +484,7 @@ data:
         deprecated: false
         secret: false
         description: Allows for configuring a custom/shared thread pool to use for the consumer. By default each consumer has its own single threaded thread pool.
-        order: 33
+        order: 29
       scheduler:
         kind: parameter
         group: scheduler
@@ -520,7 +500,7 @@ data:
         secret: false
         defaultValue: none
         description: To use a cron scheduler from either camel-spring or camel-quartz2 component
-        order: 34
+        order: 30
       schedulerProperties:
         kind: parameter
         group: scheduler
@@ -532,7 +512,7 @@ data:
         deprecated: false
         secret: false
         description: To configure additional properties when using a custom scheduler or any of the Quartz2 Spring based scheduler.
-        order: 35
+        order: 31
       startScheduler:
         kind: parameter
         group: scheduler
@@ -544,7 +524,7 @@ data:
         secret: false
         defaultValue: true
         description: Whether the scheduler should be auto started.
-        order: 36
+        order: 32
       timeUnit:
         kind: parameter
         group: scheduler
@@ -564,7 +544,7 @@ data:
         secret: false
         defaultValue: MILLISECONDS
         description: Time unit for initialDelay and delay options.
-        order: 37
+        order: 33
       useFixedDelay:
         kind: parameter
         group: scheduler
@@ -576,7 +556,7 @@ data:
         secret: false
         defaultValue: true
         description: Controls if fixed delay or fixed rate is used. See ScheduledExecutorService in JDK for details.
-        order: 38
+        order: 34
       httpProxyHost:
         kind: parameter
         group: proxy
@@ -586,7 +566,7 @@ data:
         deprecated: false
         secret: false
         description: The http proxy host which can be used for the camel-twitter. Can also be configured on the TwitterComponent level instead.
-        order: 39
+        order: 35
       httpProxyPassword:
         kind: parameter
         group: proxy
@@ -596,7 +576,7 @@ data:
         deprecated: false
         secret: false
         description: The http proxy password which can be used for the camel-twitter. Can also be configured on the TwitterComponent level instead.
-        order: 40
+        order: 36
       httpProxyPort:
         kind: parameter
         group: proxy
@@ -606,7 +586,7 @@ data:
         deprecated: false
         secret: false
         description: The http proxy port which can be used for the camel-twitter. Can also be configured on the TwitterComponent level instead.
-        order: 41
+        order: 37
       httpProxyUser:
         kind: parameter
         group: proxy
@@ -616,6 +596,46 @@ data:
         deprecated: false
         secret: false
         description: The http proxy user which can be used for the camel-twitter. Can also be configured on the TwitterComponent level instead.
+        order: 38
+      accessToken:
+        kind: parameter
+        group: security
+        label: security
+        type: string
+        javaType: java.lang.String
+        deprecated: false
+        secret: true
+        description: The access token. Can also be configured on the TwitterComponent level instead.
+        order: 39
+      accessTokenSecret:
+        kind: parameter
+        group: security
+        label: security
+        type: string
+        javaType: java.lang.String
+        deprecated: false
+        secret: true
+        description: The access secret. Can also be configured on the TwitterComponent level instead.
+        order: 40
+      consumerKey:
+        kind: parameter
+        group: security
+        label: security
+        type: string
+        javaType: java.lang.String
+        deprecated: false
+        secret: true
+        description: The consumer key. Can also be configured on the TwitterComponent level instead.
+        order: 41
+      consumerSecret:
+        kind: parameter
+        group: security
+        label: security
+        type: string
+        javaType: java.lang.String
+        deprecated: false
+        secret: true
+        description: The consumer secret. Can also be configured on the TwitterComponent level instead.
         order: 42
   documentation.adoc: |
     ifdef::env-github[]
@@ -779,10 +799,6 @@ data:
     |=======================================================================
     | Name | Group | Default | Java Type | Description
     | kind | common |  | String | *Required* What polling mode to use direct polling or event based. The event mode is only supported when the endpoint kind is event based.
-    | accessToken | common |  | String | The access token. Can also be configured on the TwitterComponent level instead.
-    | accessTokenSecret | common |  | String | The access secret. Can also be configured on the TwitterComponent level instead.
-    | consumerKey | common |  | String | The consumer key. Can also be configured on the TwitterComponent level instead.
-    | consumerSecret | common |  | String | The consumer secret. Can also be configured on the TwitterComponent level instead.
     | user | common |  | String | Username used for user timeline consumption direct message production etc.
     | bridgeErrorHandler | consumer | false | boolean | Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN/ERROR level and ignored.
     | sendEmptyMessageWhenIdle | consumer | false | boolean | If the polling consumer did not poll any files you can enable this option to send an empty message (no body) instead.
@@ -821,6 +837,10 @@ data:
     | httpProxyPassword | proxy |  | String | The http proxy password which can be used for the camel-twitter. Can also be configured on the TwitterComponent level instead.
     | httpProxyPort | proxy |  | Integer | The http proxy port which can be used for the camel-twitter. Can also be configured on the TwitterComponent level instead.
     | httpProxyUser | proxy |  | String | The http proxy user which can be used for the camel-twitter. Can also be configured on the TwitterComponent level instead.
+    | accessToken | security |  | String | The access token. Can also be configured on the TwitterComponent level instead.
+    | accessTokenSecret | security |  | String | The access secret. Can also be configured on the TwitterComponent level instead.
+    | consumerKey | security |  | String | The consumer key. Can also be configured on the TwitterComponent level instead.
+    | consumerSecret | security |  | String | The consumer secret. Can also be configured on the TwitterComponent level instead.
     |=======================================================================
     {% endraw %}
     // endpoint options: END

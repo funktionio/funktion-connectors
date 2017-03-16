@@ -33,13 +33,13 @@ data:
       syntax: chronicle-engine:addresses/path
       title: Chronicle Engine
       description: The camel chronicle-engine component let you leverage the power of OpenHFT's Chronicle-Engine.
-      label: Chronicle
+      label: datagrid,cache
       deprecated: false
       async: false
       javaType: org.apache.camel.component.chronicle.engine.ChronicleEngineComponent
       groupId: org.apache.camel
       artifactId: camel-chronicle
-      version: 2.18.1
+      version: 2.18.3
     componentProperties: {}
     properties:
       addresses:

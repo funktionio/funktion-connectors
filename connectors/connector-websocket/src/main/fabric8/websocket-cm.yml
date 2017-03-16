@@ -39,7 +39,7 @@ data:
       javaType: org.apache.camel.component.websocket.WebsocketComponent
       groupId: org.apache.camel
       artifactId: camel-websocket
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       staticResources:
         kind: property

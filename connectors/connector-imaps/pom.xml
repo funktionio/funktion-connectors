@@ -29,8 +29,8 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>Funktion Connector IMAPS</name>
-  <description>Funktion :: Connector :: IMAPS</description>
+  <name>Funktion Connector IMAPS (Secure)</name>
+  <description>Funktion :: Connector :: IMAPS (Secure)</description>
   
   <dependencies>
     <dependency>

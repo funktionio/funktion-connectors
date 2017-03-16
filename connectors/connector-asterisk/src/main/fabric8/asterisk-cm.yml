@@ -39,7 +39,7 @@ data:
       javaType: org.apache.camel.component.asterisk.AsteriskComponent
       groupId: org.apache.camel
       artifactId: camel-asterisk
-      version: 2.18.1
+      version: 2.18.3
     componentProperties: {}
     properties:
       name:

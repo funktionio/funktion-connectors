@@ -40,7 +40,7 @@ data:
       javaType: org.apache.camel.component.xmpp.XmppComponent
       groupId: org.apache.camel
       artifactId: camel-xmpp
-      version: 2.18.1
+      version: 2.18.3
     componentProperties: {}
     properties:
       host:

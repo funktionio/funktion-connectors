@@ -39,7 +39,7 @@ data:
       javaType: org.apache.camel.component.flatpack.FlatpackComponent
       groupId: org.apache.camel
       artifactId: camel-flatpack
-      version: 2.18.1
+      version: 2.18.3
     componentProperties: {}
     properties:
       type:

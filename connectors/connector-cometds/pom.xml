@@ -29,8 +29,8 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>Funktion Connector CometD</name>
-  <description>Funktion :: Connector :: CometD</description>
+  <name>Funktion Connector CometD (Secure)</name>
+  <description>Funktion :: Connector :: CometD (Secure)</description>
   
   <dependencies>
     <dependency>

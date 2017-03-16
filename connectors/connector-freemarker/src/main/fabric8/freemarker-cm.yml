@@ -40,7 +40,7 @@ data:
       javaType: org.apache.camel.component.freemarker.FreemarkerComponent
       groupId: org.apache.camel
       artifactId: camel-freemarker
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       configuration:
         kind: property

@@ -39,7 +39,7 @@ data:
       javaType: org.apache.camel.component.elsql.ElsqlComponent
       groupId: org.apache.camel
       artifactId: camel-elsql
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       databaseVendor:
         kind: property

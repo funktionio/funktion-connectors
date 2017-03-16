@@ -39,7 +39,7 @@ data:
       javaType: org.apache.camel.component.netty.NettyComponent
       groupId: org.apache.camel
       artifactId: camel-netty
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       configuration:
         kind: property

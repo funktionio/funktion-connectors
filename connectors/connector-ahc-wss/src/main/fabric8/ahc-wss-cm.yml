@@ -33,7 +33,7 @@ data:
       extendsScheme: ahc
       alternativeSchemes: ahc-ws,ahc-wss
       syntax: ahc-wss:httpUri
-      title: AHC Secure Websocket
+      title: AHC Secure Websocket (Secure)
       description: To exchange data with external Websocket servers using Async Http Client.
       label: websocket
       deprecated: false
@@ -41,7 +41,7 @@ data:
       javaType: org.apache.camel.component.ahc.ws.WsComponent
       groupId: org.apache.camel
       artifactId: camel-ahc-ws
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       client:
         kind: property
@@ -251,7 +251,7 @@ data:
         label: advanced
         type: object
         javaType: java.util.Map<java.lang.String,java.lang.Object>
-        prefix: asyncHttpClientConfig.
+        prefix: clientConfig.
         multiValue: true
         deprecated: false
         secret: false
@@ -268,6 +268,18 @@ data:
         defaultValue: false
         description: Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).
         order: 15
+      clientConfigRealmOptions:
+        kind: parameter
+        group: security
+        label: advanced,security
+        type: object
+        javaType: java.util.Map<java.lang.String,java.lang.Object>
+        prefix: clientConfig.realm.
+        multiValue: true
+        deprecated: false
+        secret: false
+        description: To configure the AsyncHttpClientConfig Realm using the key/values from the Map.
+        order: 16
       sslContextParameters:
         kind: parameter
         group: security
@@ -277,7 +289,7 @@ data:
         deprecated: false
         secret: false
         description: Reference to a org.apache.camel.util.jsse.SSLContextParameters in the Registry. This reference overrides any configured SSLContextParameters at the component level. See Using the JSSE Configuration Utility. Note that configuring this option will override any SSL/TLS configuration options provided through the clientConfig option at the endpoint or component level.
-        order: 16
+        order: 17
   documentation.adoc: |+
     [[AHC-WS-AsyncHttpClientWebsocketClientComponent]]
     Async Http Client (AHC) Websocket Client Component
@@ -350,7 +362,7 @@ data:
 
 
     // endpoint options: START
-    The AHC Websocket component supports 17 endpoint options which are listed below:
+    The AHC Websocket component supports 18 endpoint options which are listed below:
 
     {% raw %}
     [width="100%",cols="2,1,1m,1m,5",options="header"]
@@ -372,6 +384,7 @@ data:
     | clientConfig | advanced |  | AsyncHttpClientConfig | To configure the AsyncHttpClient to use a custom com.ning.http.client.AsyncHttpClientConfig instance.
     | clientConfigOptions | advanced |  | Map | To configure the AsyncHttpClientConfig using the key/values from the Map.
     | synchronous | advanced | false | boolean | Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).
+    | clientConfigRealmOptions | security |  | Map | To configure the AsyncHttpClientConfig Realm using the key/values from the Map.
     | sslContextParameters | security |  | SSLContextParameters | Reference to a org.apache.camel.util.jsse.SSLContextParameters in the Registry. This reference overrides any configured SSLContextParameters at the component level. See Using the JSSE Configuration Utility. Note that configuring this option will override any SSL/TLS configuration options provided through the clientConfig option at the endpoint or component level.
     |=======================================================================
     {% endraw %}

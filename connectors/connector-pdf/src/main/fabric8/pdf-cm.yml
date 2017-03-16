@@ -40,7 +40,7 @@ data:
       javaType: org.apache.camel.component.pdf.PdfComponent
       groupId: org.apache.camel
       artifactId: camel-pdf
-      version: 2.18.1
+      version: 2.18.3
     componentProperties: {}
     properties:
       operation:

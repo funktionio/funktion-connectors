@@ -40,7 +40,7 @@ data:
       javaType: org.apache.camel.component.influxdb.InfluxDbComponent
       groupId: org.apache.camel
       artifactId: camel-influxdb
-      version: 2.18.1
+      version: 2.18.3
     componentProperties: {}
     properties:
       connectionBean:

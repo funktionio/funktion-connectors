@@ -40,7 +40,7 @@ data:
       javaType: org.apache.camel.component.jbpm.JBPMComponent
       groupId: org.apache.camel
       artifactId: camel-jbpm
-      version: 2.18.1
+      version: 2.18.3
     componentProperties: {}
     properties:
       connectionURL:

@@ -40,7 +40,7 @@ data:
       javaType: org.apache.camel.component.lumberjack.LumberjackComponent
       groupId: org.apache.camel
       artifactId: camel-lumberjack
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       sslContextParameters:
         kind: property

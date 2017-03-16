@@ -29,8 +29,8 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>Funktion Connector HTTP4S</name>
-  <description>Funktion :: Connector :: HTTP4S</description>
+  <name>Funktion Connector HTTP4S (Secure)</name>
+  <description>Funktion :: Connector :: HTTP4S (Secure)</description>
   
   <dependencies>
     <dependency>

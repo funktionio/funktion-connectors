@@ -32,7 +32,7 @@ data:
       scheme: cometds
       alternativeSchemes: cometd,cometds
       syntax: cometds:host:port/channelName
-      title: CometD
+      title: CometD (Secure)
       description: The cometd component is a transport for working with the Jetty implementation of the cometd/bayeux protocol.
       label: websocket
       deprecated: false
@@ -40,7 +40,7 @@ data:
       javaType: org.apache.camel.component.cometd.CometdComponent
       groupId: org.apache.camel
       artifactId: camel-cometd
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       sslKeyPassword:
         kind: property
