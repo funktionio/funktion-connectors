@@ -16,6 +16,7 @@
  */
 package io.fabric8.funktion.runtime;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.fabric8.funktion.model.Flow;
 import io.fabric8.funktion.model.Funktion;
 import io.fabric8.funktion.model.Funktions;
@@ -45,6 +46,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -55,6 +57,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import static io.fabric8.funktion.model.Funktions.createObjectMapper;
 import static io.fabric8.funktion.support.Lists.notNullList;
 
 /**
@@ -68,7 +71,17 @@ public class FunktionRouteBuilder extends RouteBuilder {
     private static final String DEFAULT_TRIGGER_URL = "http://0.0.0.0:8080/";
     private static final String DEFAULT_HTTP_ENDPOINT_PREFIX = "servlet:funktion";
 
-    private Set<String> localHosts = new HashSet<>(Arrays.asList("localhost", "0.0.0.0", "127.0.0.1"));
+    private final Set<String> localHosts = new HashSet<>(Arrays.asList("localhost", "0.0.0.0", "127.0.0.1"));
+
+    private FunktionConfigurationProperties config = new FunktionConfigurationProperties();
+
+    public FunktionConfigurationProperties getConfig() {
+        return config;
+    }
+
+    public void setConfig(FunktionConfigurationProperties config) {
+        this.config = config;
+    }
 
     // must have a main method spring-boot can run
     public static void main(String[] args) {
@@ -98,12 +111,38 @@ public class FunktionRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        Funktion config = loadFunktion();
+        // inject auto configured properties if there is any
+        Set<FunktionConfigurationProperties> props = getContext().getRegistry().findByType(FunktionConfigurationProperties.class);
+        if (props != null && props.size() == 1) {
+            config = props.iterator().next();
+        }
+
+        Funktion funktion = loadFunktion();
 
         int idx = 0;
-        List<Flow> rules = config.getFlows();
+        List<Flow> rules = funktion.getFlows();
         for (Flow rule : rules) {
             configureRule(rule, idx++);
+        }
+        LOG.info("Configured {} flow(s)", idx);
+
+        try {
+            if ("yaml".equals(config.getDumpFlowModel())) {
+                StringWriter sw = new StringWriter();
+                createObjectMapper().writeValue(sw, rules);
+                LOG.info("============================================================");
+                LOG.info("\n" + sw.toString());
+                LOG.info("============================================================");
+            } else if ("json".equals(config.getDumpFlowModel())) {
+                StringWriter sw = new StringWriter();
+                ObjectMapper mapper = new ObjectMapper();
+                mapper.writerWithDefaultPrettyPrinter().writeValue(sw, rules);
+                LOG.info("============================================================");
+                LOG.info("\n" + sw.toString());
+                LOG.info("============================================================");
+            }
+        } catch (Exception e) {
+            LOG.warn("Cannot dump flow model due " + e.getMessage() + ". This exception is ignored.");
         }
     }
 
@@ -112,10 +151,9 @@ public class FunktionRouteBuilder extends RouteBuilder {
     }
 
     protected void configureRule(Flow flow, int funktionIndex) throws MalformedURLException {
-        if (flow.isTraceEnabled()) {
+        if (flow.isTraceEnabled() || (config.getTrace() != null && config.getTrace())) {
             getContext().setTracing(true);
         }
-
 
         StringBuilder message = new StringBuilder("FLOW ");
         String name = flow.getName();
@@ -176,7 +214,7 @@ public class FunktionRouteBuilder extends RouteBuilder {
             throw new IllegalStateException("No valid steps! Invalid flow " + flow);
 
         }
-        if (flow.isLogResultEnabled()) {
+        if (flow.isLogResultEnabled() || (config.getLogResult() != null && config.getLogResult())) {
             String chain = "log:" + name + "?showStreams=true";
             route.to(chain);
             message.append(" => ");
@@ -185,12 +223,13 @@ public class FunktionRouteBuilder extends RouteBuilder {
         }
         LOG.info(message.toString());
 
-        if (flow.isSingleMessageModeEnabled()) {
+        // TODO: Camel 2.19 has funktionality OOTB for this
+        // https://github.com/apache/camel/blob/master/components/camel-spring-boot/src/main/java/org/apache/camel/spring/boot/CamelConfigurationProperties.java#L146
+        if (flow.isSingleMessageModeEnabled() || (config.getSingleMessageMode() != null && config.getSingleMessageMode())) {
             LOG.info("Enabling single message mode so that only one message is consumed for Design Mode");
             getContext().addRoutePolicyFactory(new SingleMessageRoutePolicyFactory());
         }
     }
-
 
     protected void addSteps(ProcessorDefinition route, Iterable<Step> steps) {
         if (route != null && steps != null) {
@@ -398,6 +437,5 @@ public class FunktionRouteBuilder extends RouteBuilder {
             return null;
         }
     }
-
 
 }

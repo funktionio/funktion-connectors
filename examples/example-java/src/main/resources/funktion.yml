@@ -1,14 +1,11 @@
 flows:
   - name: thingy
-    trace: true
-    logResult: true
     steps:
     - kind: endpoint
       uri: http
     - kind: function
       name: io.fabric8.funktion.example.Main::cheese
   - name: thirsty
-    logResult: true
     steps:
     - kind: endpoint
       uri: http:bar
