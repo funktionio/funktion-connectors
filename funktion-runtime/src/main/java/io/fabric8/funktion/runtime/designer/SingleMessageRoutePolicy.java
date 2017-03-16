@@ -23,9 +23,8 @@ import org.apache.camel.support.RoutePolicySupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- */
 public class SingleMessageRoutePolicy extends RoutePolicySupport {
+
     private static final transient Logger LOG = LoggerFactory.getLogger(SingleMessageRoutePolicy.class);
 
     @Override
@@ -42,10 +41,11 @@ public class SingleMessageRoutePolicy extends RoutePolicySupport {
 
         LOG.info("Exchange Done for route " + route.getId() +
                 " exchange: " + exchange.getExchangeId() + " in: " + exchange.getIn().getBody(String.class));
+
         try {
             stopRoute(route);
         } catch (Exception e) {
-            throw new RuntimeExchangeException(e.getMessage(), exchange, e);
+            // ignore
         }
     }
 }
