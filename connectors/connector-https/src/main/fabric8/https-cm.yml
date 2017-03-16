@@ -32,7 +32,7 @@ data:
       scheme: https
       alternativeSchemes: http,https
       syntax: https:httpUri
-      title: HTTPS
+      title: HTTPS (Secure)
       description: For calling out to external HTTP servers using Apache HTTP Client 3.x.
       label: http
       deprecated: false
@@ -42,7 +42,7 @@ data:
       javaType: org.apache.camel.component.http.HttpComponent
       groupId: org.apache.camel
       artifactId: camel-http
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       httpClientConfigurer:
         kind: property

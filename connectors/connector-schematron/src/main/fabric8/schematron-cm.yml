@@ -40,7 +40,7 @@ data:
       javaType: org.apache.camel.component.schematron.SchematronComponent
       groupId: org.apache.camel
       artifactId: camel-schematron
-      version: 2.18.1
+      version: 2.18.3
     componentProperties: {}
     properties:
       path:

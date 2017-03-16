@@ -39,7 +39,7 @@ data:
       javaType: org.apache.camel.component.etcd.EtcdComponent
       groupId: org.apache.camel
       artifactId: camel-etcd
-      version: 2.18.1
+      version: 2.18.3
     componentProperties: {}
     properties:
       namespace:
@@ -220,7 +220,8 @@ data:
         secret: true
         description: The user name to use for basic authentication.
         order: 15
-  documentation.adoc: |+
+  documentation.adoc: |
+    ## etcd Component
     +[[Etcd-Etcd]]
     +Etcd
 
@@ -278,5 +279,3 @@ data:
     // component options: START
     The etcd component has no options.
     // component options: END
-
-

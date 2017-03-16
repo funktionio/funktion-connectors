@@ -29,8 +29,8 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>Funktion Connector SIP</name>
-  <description>Funktion :: Connector :: SIP</description>
+  <name>Funktion Connector SIP (Secure)</name>
+  <description>Funktion :: Connector :: SIP (Secure)</description>
   
   <dependencies>
     <dependency>

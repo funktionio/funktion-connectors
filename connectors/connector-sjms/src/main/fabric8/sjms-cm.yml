@@ -39,7 +39,7 @@ data:
       javaType: org.apache.camel.component.sjms.SjmsComponent
       groupId: org.apache.camel
       artifactId: camel-sjms
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       connectionFactory:
         kind: property

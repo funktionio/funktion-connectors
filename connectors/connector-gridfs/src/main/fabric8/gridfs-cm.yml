@@ -39,7 +39,7 @@ data:
       javaType: org.apache.camel.component.gridfs.GridFsComponent
       groupId: org.apache.camel
       artifactId: camel-mongodb-gridfs
-      version: 2.18.1
+      version: 2.18.3
     componentProperties: {}
     properties:
       connectionBean:
@@ -189,8 +189,14 @@ data:
         kind: parameter
         group: consumer
         label: consumer
-        type: object
-        javaType: org.apache.camel.component.gridfs.GridFsEndpoint.QueryStrategy
+        type: string
+        javaType: org.apache.camel.component.gridfs.QueryStrategy
+        enum:
+        - TimeStamp
+        - PersistentTimestamp
+        - FileAttribute
+        - TimeStampAndFileAttribute
+        - PersistentTimestampAndFileAttribute
         deprecated: false
         secret: false
         defaultValue: TimeStamp

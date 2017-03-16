@@ -39,7 +39,7 @@ data:
       javaType: org.apache.camel.component.netty4.NettyComponent
       groupId: org.apache.camel
       artifactId: camel-netty4
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       maximumPoolSize:
         kind: property

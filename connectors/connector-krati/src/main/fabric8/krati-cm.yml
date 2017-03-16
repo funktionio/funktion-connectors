@@ -39,7 +39,7 @@ data:
       javaType: org.apache.camel.component.krati.KratiComponent
       groupId: org.apache.camel
       artifactId: camel-krati
-      version: 2.18.1
+      version: 2.18.3
     componentProperties: {}
     properties:
       path:

@@ -40,7 +40,7 @@ data:
       javaType: org.apache.camel.component.linkedin.LinkedInComponent
       groupId: org.apache.camel
       artifactId: camel-linkedin
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       configuration:
         kind: property

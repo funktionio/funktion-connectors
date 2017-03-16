@@ -32,7 +32,7 @@ data:
       scheme: sips
       alternativeSchemes: sip,sips
       syntax: sips:uri
-      title: SIP
+      title: SIP (Secure)
       description: To send and receive messages using the SIP protocol (used in telco and mobile).
       label: mobile
       deprecated: false
@@ -40,7 +40,7 @@ data:
       javaType: org.apache.camel.component.sip.SipComponent
       groupId: org.apache.camel
       artifactId: camel-sip
-      version: 2.18.1
+      version: 2.18.3
     componentProperties: {}
     properties:
       uri:

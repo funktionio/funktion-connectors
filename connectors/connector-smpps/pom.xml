@@ -29,8 +29,8 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>Funktion Connector SMPP</name>
-  <description>Funktion :: Connector :: SMPP</description>
+  <name>Funktion Connector SMPP (Secure)</name>
+  <description>Funktion :: Connector :: SMPP (Secure)</description>
   
   <dependencies>
     <dependency>

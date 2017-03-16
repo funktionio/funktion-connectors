@@ -40,7 +40,7 @@ data:
       javaType: org.apache.camel.component.cometd.CometdComponent
       groupId: org.apache.camel
       artifactId: camel-cometd
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       sslKeyPassword:
         kind: property

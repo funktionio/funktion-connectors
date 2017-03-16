@@ -41,7 +41,7 @@ data:
       javaType: org.apache.camel.component.scp.ScpComponent
       groupId: org.apache.camel
       artifactId: camel-jsch
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       verboseLogging:
         kind: property

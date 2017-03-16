@@ -39,7 +39,7 @@ data:
       javaType: org.apache.camel.component.mqtt.MQTTComponent
       groupId: org.apache.camel
       artifactId: camel-mqtt
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       host:
         kind: property

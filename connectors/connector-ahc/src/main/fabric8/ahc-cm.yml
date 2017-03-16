@@ -41,7 +41,7 @@ data:
       javaType: org.apache.camel.component.ahc.AhcComponent
       groupId: org.apache.camel
       artifactId: camel-ahc
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       client:
         kind: property
@@ -187,7 +187,7 @@ data:
         label: advanced
         type: object
         javaType: java.util.Map<java.lang.String,java.lang.Object>
-        prefix: asyncHttpClientConfig.
+        prefix: clientConfig.
         multiValue: true
         deprecated: false
         secret: false
@@ -204,6 +204,18 @@ data:
         defaultValue: false
         description: Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).
         order: 10
+      clientConfigRealmOptions:
+        kind: parameter
+        group: security
+        label: advanced,security
+        type: object
+        javaType: java.util.Map<java.lang.String,java.lang.Object>
+        prefix: clientConfig.realm.
+        multiValue: true
+        deprecated: false
+        secret: false
+        description: To configure the AsyncHttpClientConfig Realm using the key/values from the Map.
+        order: 11
       sslContextParameters:
         kind: parameter
         group: security
@@ -213,7 +225,7 @@ data:
         deprecated: false
         secret: false
         description: Reference to a org.apache.camel.util.jsse.SSLContextParameters in the Registry. This reference overrides any configured SSLContextParameters at the component level. See Using the JSSE Configuration Utility. Note that configuring this option will override any SSL/TLS configuration options provided through the clientConfig option at the endpoint or component level.
-        order: 11
+        order: 12
   documentation.adoc: |+
     [[AHC-AsyncHttpClientComponent]]
     Async Http Client Component
@@ -267,7 +279,7 @@ data:
 
 
     // endpoint options: START
-    The AHC component supports 12 endpoint options which are listed below:
+    The AHC component supports 13 endpoint options which are listed below:
 
     {% raw %}
     [width="100%",cols="2,1,1m,1m,5",options="header"]
@@ -284,6 +296,7 @@ data:
     | clientConfig | advanced |  | AsyncHttpClientConfig | To configure the AsyncHttpClient to use a custom com.ning.http.client.AsyncHttpClientConfig instance.
     | clientConfigOptions | advanced |  | Map | To configure the AsyncHttpClientConfig using the key/values from the Map.
     | synchronous | advanced | false | boolean | Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).
+    | clientConfigRealmOptions | security |  | Map | To configure the AsyncHttpClientConfig Realm using the key/values from the Map.
     | sslContextParameters | security |  | SSLContextParameters | Reference to a org.apache.camel.util.jsse.SSLContextParameters in the Registry. This reference overrides any configured SSLContextParameters at the component level. See Using the JSSE Configuration Utility. Note that configuring this option will override any SSL/TLS configuration options provided through the clientConfig option at the endpoint or component level.
     |=======================================================================
     {% endraw %}

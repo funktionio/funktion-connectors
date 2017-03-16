@@ -40,7 +40,7 @@ data:
       javaType: org.apache.camel.component.cm.CMComponent
       groupId: org.apache.camel
       artifactId: camel-cm-sms
-      version: 2.18.1
+      version: 2.18.3
     componentProperties: {}
     properties:
       host:

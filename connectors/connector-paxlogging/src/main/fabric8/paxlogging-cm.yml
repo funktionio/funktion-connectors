@@ -40,7 +40,7 @@ data:
       javaType: org.apache.camel.component.paxlogging.PaxLoggingComponent
       groupId: org.apache.camel
       artifactId: camel-paxlogging
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       bundleContext:
         kind: property

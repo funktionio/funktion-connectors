@@ -39,7 +39,7 @@ data:
       javaType: org.apache.camel.component.aws.kinesis.KinesisComponent
       groupId: org.apache.camel
       artifactId: camel-aws
-      version: 2.18.1
+      version: 2.18.3
     componentProperties: {}
     properties:
       streamName:
@@ -88,6 +88,7 @@ data:
         - AT_TIMESTAMP
         deprecated: false
         secret: false
+        defaultValue: TRIM_HORIZON
         description: Defines where in the Kinesis stream to start getting records
         order: 3
       maxResultsPerRequest:
@@ -121,7 +122,7 @@ data:
         javaType: java.lang.String
         deprecated: false
         secret: false
-        description: The sequence number to start polling from
+        description: The sequence number to start polling from. Required if iteratorType is set to AFTER_SEQUENCE_NUMBER or AT_SEQUENCE_NUMBER
         order: 6
       shardId:
         kind: parameter
@@ -363,7 +364,7 @@ data:
 
     *Available as of Camel 2.17*
 
-    The Kinesis component supports receiving messages from Amazon Kinesis
+    The Kinesis component supports receiving messages from and sending messages to Amazon Kinesis
     service.
 
     Prerequisites
@@ -410,10 +411,10 @@ data:
     | streamName | common |  | String | *Required* Name of the stream
     | amazonKinesisClient | common |  | AmazonKinesis | *Required* Amazon Kinesis client to use for all requests for this endpoint
     | bridgeErrorHandler | consumer | false | boolean | Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN/ERROR level and ignored.
-    | iteratorType | consumer |  | ShardIteratorType | Defines where in the Kinesis stream to start getting records
+    | iteratorType | consumer | TRIM_HORIZON | ShardIteratorType | Defines where in the Kinesis stream to start getting records
     | maxResultsPerRequest | consumer | 1 | int | Maximum number of records that will be fetched in each poll
     | sendEmptyMessageWhenIdle | consumer | false | boolean | If the polling consumer did not poll any files you can enable this option to send an empty message (no body) instead.
-    | sequenceNumber | consumer |  | String | The sequence number to start polling from
+    | sequenceNumber | consumer |  | String | The sequence number to start polling from. Required if iteratorType is set to AFTER_SEQUENCE_NUMBER or AT_SEQUENCE_NUMBER
     | shardId | consumer |  | String | Defines which shardId in the Kinesis stream to get records from
     | exceptionHandler | consumer (advanced) |  | ExceptionHandler | To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN/ERROR level and ignored.
     | exchangePattern | consumer (advanced) |  | ExchangePattern | Sets the exchange pattern when the consumer creates an exchange.
@@ -481,7 +482,7 @@ data:
     AmazonKinesis configuration
     +++++++++++++++++++++++++++
 
-    You will need to create an instance of AmazonDynamoDBStreamsClient and
+    You will need to create an instance of AmazonKinesisClient and
     bind it to the registry
 
     [source,java]
@@ -491,15 +492,21 @@ data:
     clientConfiguration.setProxyPort(8080);
 
     Region region = Region.getRegion(Regions.fromName(region));
-    region.createClient(AmazonDynamoDBStreamsClient.class, null, clientConfiguration);
+    region.createClient(AmazonKinesisClient.class, null, clientConfiguration);
     // the 'null' here is the AWSCredentialsProvider which defaults to an instance of DefaultAWSCredentialsProviderChain
 
     registry.bind("kinesisClient", client);
     --------------------------------------------------------------------------------------------------------------------
 
-    [[AWS-KINESIS-ProvidingAWSCredentials]]
-    Providing AWS Credentials
-    +++++++++++++++++++++++++
+    You then have to reference the AmazonKinesisClient in the `amazonKinesisClient` URI option.
+
+    [source,java]
+    --------------------------------------------------------------------------------------------------------------------
+    from("aws-kinesis://mykinesisstream?amazonKinesisClient=#kinesisClient")
+      .to("log:out?showAll=true");
+    --------------------------------------------------------------------------------------------------------------------
+
+    #### Providing AWS Credentials
 
     It is recommended that the credentials are obtained by using the
     http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/DefaultAWSCredentialsProviderChain.html[DefaultAWSCredentialsProviderChain]

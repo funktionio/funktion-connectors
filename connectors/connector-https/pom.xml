@@ -29,8 +29,8 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>Funktion Connector HTTPS</name>
-  <description>Funktion :: Connector :: HTTPS</description>
+  <name>Funktion Connector HTTPS (Secure)</name>
+  <description>Funktion :: Connector :: HTTPS (Secure)</description>
   
   <dependencies>
     <dependency>

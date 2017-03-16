@@ -42,7 +42,7 @@ data:
       javaType: org.apache.camel.component.http4.HttpComponent
       groupId: org.apache.camel
       artifactId: camel-http4
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       httpClientConfigurer:
         kind: property

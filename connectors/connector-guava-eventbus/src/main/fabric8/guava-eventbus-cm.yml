@@ -39,7 +39,7 @@ data:
       javaType: org.apache.camel.component.guava.eventbus.GuavaEventBusComponent
       groupId: org.apache.camel
       artifactId: camel-guava-eventbus
-      version: 2.18.1
+      version: 2.18.3
     componentProperties:
       eventBus:
         kind: property
